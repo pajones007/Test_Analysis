@@ -1,0 +1,29 @@
+#Analyze Volume Profiles
+
+#The volume profile allows any trader to evaluate the market context to keep track of the never-ending auction process. 
+#That’s what a market is at the end of the day, a constant negotiating process to find equilibrium/agreement (via the accumulation of transactions at a certain level), 
+#and the ones that were perceived too cheap or too expensive (no volume found). 
+#The art of reading volume profile is all about studying the anatomy of the market auctions.
+
+#How to read these volume profile structures:
+
+#https://globalprime.medium.com/how-to-interpret-volume-profile-structures-in-the-forex-market-f28f0b5efd62
+
+#More specifically, we’ll be using Python and statistical and signal processing tools in SciPy’s suite of modules. Data plots are rendered with Plotly.
+
+#https://medium.com/swlh/how-to-analyze-volume-profiles-with-python-3166bb10ff24
+
+
+pip install yfinance
+
+import yfinance as yf
+import pandas as pd
+import numpy as np
+from scipy import stats, signal
+import plotly.express as px
+import plotly.graph_objects as go
+
+data = yf.download('CXL.AX', period='3mo', interval='1d')
+
+volume = data['Volume']
+close = data['Close']
